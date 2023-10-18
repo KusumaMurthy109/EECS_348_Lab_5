@@ -1,5 +1,14 @@
+/*
+Author: Kusuma Murthy
+KUID: 3095756
+Date Created: 10/14/2023
+Lab: Lab 5, Program 2
+Last modified: 10/18/2023
+Purpose: To write a program that reads into a file and provides the user a sales report
+*/
 #include <stdio.h>
 
+// This method prints out the differnet combinatiosn for the score
 void points(int input_value)
 {
     const int td_conversion = 8;
@@ -28,6 +37,7 @@ void points(int input_value)
     }
 }
 
+// this method mainly interacts with the user as it asks for an input, gives an output, and it runs the while loop until the user inputs a 0 or 1
 int main()
 {
     int input_value;

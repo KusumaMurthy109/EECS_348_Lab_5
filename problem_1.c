@@ -1,16 +1,26 @@
+/*
+Author: Kusuma Murthy
+KUID: 3095756
+Date Created: 10/14/2023
+Lab: Lab 5, Program 1
+Last modified: 10/18/2023
+Purpose: To write a program that reads into a file and provides the user a sales report
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-struct Key_Value
+struct Key_Value // initializing a dictionary
 {
     char key[100];
     double value;
 };
 
-struct Key_Value month_sales[12];
-struct Key_Value high_to_low[12];
+struct Key_Value month_sales[12]; // creates an empty dictionary called month_sales
 
+// This method creates a dictionary where the months are the key names, and the sales number is the value
+// This method also reads into the file containing the sales numbers
 void create_dictionary()
 {
     FILE *sales = fopen("problem_1_input.txt", "r");
@@ -29,6 +39,7 @@ void create_dictionary()
     fclose(sales);
 }
 
+// This method prints the monthly sales report
 void print_monthly_sales_report()
 {
     printf("Monthly Sales Report for 2022: \n");
@@ -42,6 +53,7 @@ void print_monthly_sales_report()
     }
 }
 
+// This method prints the sales summary
 void print_sales_summary()
 {
     float max_sales = month_sales[0].value, min_sales = max_sales, avg_sales = 0, total_sales = 0;
@@ -74,6 +86,7 @@ void print_sales_summary()
     printf("Average sales: $%.2f\n", avg_sales);
 }
 
+// This function calculates and prints the six month moving average report
 void print_six_month_report()
 {
     char max_month[100], min_month[100];
@@ -93,6 +106,7 @@ void print_six_month_report()
     }
 }
 
+// This method prints the sales report in order of highest slaes to the lowest sales
 void print_high_to_low()
 {
     float temp_value;
@@ -103,11 +117,12 @@ void print_high_to_low()
         {
             if (month_sales[i].value > month_sales[j].value)
             {
-
+                // perfroms the actions on the value pairs
                 temp_value = month_sales[i].value;
                 month_sales[i].value = month_sales[j].value;
                 month_sales[j].value = temp_value;
 
+                // performs the actions on the key pairs
                 struct Key_Value temp_month;
                 strcpy(temp_month.key, month_sales[i].key);
                 strcpy(month_sales[i].key, month_sales[j].key);
@@ -127,18 +142,19 @@ void print_high_to_low()
     }
 }
 
+// this is the main methos with call of the the methods created above and clculates and prints the results
 int main()
 {
     create_dictionary();
     print_monthly_sales_report();
     printf("\n");
-    printf("--------------------------------------------------\n");
+    printf("\n");
     print_sales_summary();
     printf("\n");
-    printf("--------------------------------------------------\n");
+    printf("\n");
     print_six_month_report();
     printf("\n");
-    printf("--------------------------------------------------\n");
+    printf("\n");
     print_high_to_low();
     return 0;
 }
